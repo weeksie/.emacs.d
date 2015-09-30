@@ -1,3 +1,14 @@
+(require-package 'nyan-mode)
+
+(defun nuke-all-buffers ()
+  (interactive)
+  (mapcar 'kill-buffer (buffer-list))
+  (delete-other-windows))
+
+(defun turn-off-delete-trailing-whitespace ()
+  (interactive)
+  (remove-hook 'before-save-hook 'delete-trailing-whitespace))
+
 
 (defun rename-file-and-buffer (new-name)
   "Renames both current buffer and file it's visiting to NEW-NAME."
@@ -100,10 +111,14 @@
 (setq indent-tabs-mode nil)
 (setq tab-width 2)
 
+(electric-pair-mode)
+(show-paren-mode)
 ;; Quit minimising the fucking window on accident
 (when window-system
   (progn
     (global-set-key "\C-z" 'save-buffer)
     (global-set-key "\C-x\C-z" 'save-buffer)))
+
+
 
 (provide 'init-editing)

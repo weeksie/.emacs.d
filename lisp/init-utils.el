@@ -86,4 +86,74 @@
       (browse-url (concat "file://" file-name)))))
 
 
+
+(defun unicode-symbol (name)
+   "Translate a symbolic name for a Unicode character -- e.g., LEFT-ARROW
+ or GREATER-THAN into an actual Unicode character code. "
+   (decode-char 'ucs (case name
+		;; arrows
+                          ('space 160)
+                          ('left-arrow 8592)
+                          ('up-arrow 8593)
+                          ('right-arrow 8594)
+                          ('down-arrow 8595)
+                          ;; boxes
+                          ('double-vertical-bar #X2551)
+                          ;; relational operators
+                          ('equal #X003d)
+                          ('not-equal #X2260)
+                          ('identical #X2261)
+                          ('not-identical #X2262)
+                          ('less-than #X003c)
+                          ('greater-than #X003e)
+                          ('less-than-or-equal-to #X2264)
+                          ('greater-than-or-equal-to #X2265)
+                          ;; logical operators
+                          ('logical-and #X2227)
+                          ('logical-or #X2228)
+                          ('logical-neg #X00AC)
+                          ;; misc
+                          ('nil #X2205)
+                          ('horizontal-ellipsis #X2026)
+                          ('double-exclamation #X203C)
+                          ('prime #X2032)
+                          ('double-prime #X2033)
+                          ('for-all #X2200)
+                          ('there-exists #X2203)
+                          ('element-of #X2208)
+                          ('vertical-line 45)
+                          ('bullet 8226)
+                          ;; mathematical operators
+                          ('square-root #X221A)
+                          ('squared #X00B2)
+                          ('cubed #X00B3)
+                          ;; letters
+                          ('alpha 945)
+                          ('beta 946)
+                          ('gamma 947)
+                          ('delta 948)
+                          ('iota 953)
+                          ('lambda 955)
+                          ('rho 961)
+                          ('omega 969)
+                          ('epsilon 949)
+                          ('eta 951)
+                          ('sigma 963))))
+
+(defun substitute-pattern-with-unicode (pattern symbol)
+    "Add a font lock hook to replace the matched part of PATTERN with the
+     Unicode symbol SYMBOL looked up with UNICODE-SYMBOL."
+    (font-lock-add-keywords
+    nil `((,pattern
+           (0 (progn (compose-region (match-beginning 1) (match-end 1)
+                                     ,(unicode-symbol symbol)
+                                     'decompose-region)
+                             nil))))))
+(defun substitute-patterns-with-unicode (patterns)
+   "Call SUBSTITUTE-PATTERN-WITH-UNICODE repeatedly."
+   (mapcar #'(lambda (x)
+               (substitute-pattern-with-unicode (car x)
+                                                (cdr x)))
+           patterns))
+
 (provide 'init-utils)
