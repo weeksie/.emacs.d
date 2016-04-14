@@ -6,6 +6,7 @@
                "\\.jsx$"
                "\\.html$"
                "\\.erb$"
+               "\\.ejs$"
                "\\.php$")
 
 (defadvice web-mode-highlight-part (around tweak-jsx activate)

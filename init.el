@@ -52,6 +52,7 @@
 (require 'init-js)
 (require 'init-lua)
 (require 'init-ruby)
+(require 'init-php)
 (require 'init-elm)
 (require 'init-nxml)
 (require 'init-haskell)
