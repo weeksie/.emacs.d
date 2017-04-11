@@ -1,5 +1,5 @@
 (require-package 'ruby-mode)
-
+(require-package 'ruby-hash-syntax)
 (add-auto-mode 'ruby-mode
                "\\.r[bs]$"
                "Rakefile"
@@ -9,6 +9,7 @@
                "\\.gemspec$"
                "\\.god$"
                "\\.rabl$"
+               "\\.arb$"
                "\\.deface$")
 
 (defun ruby-eval-buffer () (interactive)

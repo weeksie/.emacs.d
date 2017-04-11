@@ -4,6 +4,7 @@
 (require-package 'flycheck)
 
 (require 'flycheck) ; no idea why this is needed for flycheck but not the others
+(require 'prettier-js)
 
 (maybe-require-package 'js2-mode)
 (maybe-require-package 'coffee-mode)
@@ -103,6 +104,10 @@
   (interactive "r")
   (shell-command  (buffer-substring-no-properties start end)))
 
+
+(defun run-prettier-before-save ()
+  (interactive)
+  ((when (eq major-mode 'js2-mode) (prettier))))
 
 (setq web-mode-content-types-alist '(("jsx"  . "\\.js[x]?\\'")))
 

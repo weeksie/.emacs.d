@@ -1,6 +1,6 @@
 (require-package 'web-mode)
 (require-package 'flycheck)
-
+(require-package 'slim-mode)
 
 (add-auto-mode 'web-mode
                "\\.jsx$"
@@ -8,6 +8,9 @@
                "\\.erb$"
                "\\.ejs$"
                "\\.php$")
+
+(add-auto-mode 'slim-mode
+               "\\.slime?$")
 
 (defadvice web-mode-highlight-part (around tweak-jsx activate)
   (if (equal web-mode-content-type "jsx")
@@ -18,7 +21,8 @@
 (defun my-web-mode-hook ()
   "Hooks for Web mode. Adjust indents"
   ;;; http://web-mode.org/
-  (setq web-mode-markup-indent-offset 2)
+  (interactive)
+  (setq web-mode-markup-indent-offset 4)
   (setq web-mode-css-indent-offset 2)
   (setq web-mode-code-indent-offset 2))
 

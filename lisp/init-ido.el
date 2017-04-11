@@ -1,4 +1,8 @@
+(require-package 'flx-ido)
 (require 'ido)
 (ido-mode t)
+(ido-everywhere t)
+(flx-ido-mode t)
 (setq ido-enable-flex-matching t)
+(setq ido-use-faces nil)
 (provide 'init-ido)

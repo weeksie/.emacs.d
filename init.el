@@ -1,3 +1,12 @@
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+(package-initialize)
+
+(when (not package-archive-contents)
+    (package-refresh-contents))
+
 (let ((minver "23.3"))
   (when (version<= emacs-version "23.1")
     (error "Your Emacs is too old -- this config requires v%s or higher" minver)))
@@ -28,17 +37,19 @@
 ;(desktop-save-mode nil)
 ;(setq desktop-restore-eager t)
 ;(set-default-font "Inconsolata-14")
-(set-default-font "Consolas-13")
+;(set-default-font "Consolas-13")
+(set-default-font "Mononoki-13")
 (set-background-color "#fdf6e3")
 
 (when window-system
   (progn
-    (set-frame-size (selected-frame) 205 75)
+    (set-frame-size (selected-frame) 205 70)
     (split-window-vertically)
     (split-window-horizontally)
     (enlarge-window 20)))
 
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
+(add-to-list 'load-path (expand-file-name "site-lisp" user-emacs-directory))
 
 
 (require 'init-compat)
@@ -48,8 +59,10 @@
 (require 'init-exec-path)
 (require 'init-ido)
 (require 'init-editing)
+(require 'init-scratch)
 
 (require 'init-js)
+(require 'init-graphql)
 (require 'init-lua)
 (require 'init-ruby)
 (require 'init-php)
@@ -62,3 +75,23 @@
 (require 'init-mmm)
 (require 'init-css)
 (require 'init-markdown)
+(require 'init-yaml)
+(require 'init-git)
+(require 'init-projectile)
+(require 'init-sql)
+(require 'init-docker)
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (alchemist slim-mode ruby-hash-syntax dockerfile-mode avy graphql-mode graphql flx-ido projectile-rails projectile yaml-mode web-mode tidy skewer-less scss-mode sass-mode rainbow-mode rainbow-delimiters php-mode nyan-mode mmm-mode markdown-mode magit lua-mode less-css-mode json-mode js-comint haskell-mode git-timemachine fullframe flycheck exec-path-from-shell ess erlang elm-mode elixir-mode css-eldoc coffee-mode))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

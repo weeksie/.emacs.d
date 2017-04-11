@@ -1,4 +1,7 @@
 (require-package 'nyan-mode)
+(require-package 'avy)
+
+
 
 (defun nuke-all-buffers ()
   (interactive)
@@ -102,14 +105,16 @@
 (global-set-key [C-kp-delete] 'kill-word)
 (global-set-key "\C-x\C-a" 'align-regexp)
 
+(global-set-key (kbd "C-'") 'avy-goto-char-2)
+
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 (global-set-key (kbd "M-\140") 'other-window) ; M-` just like in the rest of OS X
 (setq mac-command-modifier 'meta mac-option-modifier nil)
 
-(setq indent-tabs-mode nil)
-(setq tab-width 2)
+(setq-default indent-tabs-mode nil)
+(setq-default tab-width 2)
 
 (electric-pair-mode)
 (show-paren-mode)
