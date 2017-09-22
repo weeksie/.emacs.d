@@ -4,7 +4,6 @@
 (require-package 'flycheck)
 
 (require 'flycheck) ; no idea why this is needed for flycheck but not the others
-(require 'prettier-js)
 
 (maybe-require-package 'js2-mode)
 (maybe-require-package 'coffee-mode)
@@ -33,11 +32,11 @@
                "\\.em$")
 
 
-
 (defun custom-js2-mode-hook ()
   (add-hook 'before-save-hook 'delete-trailing-whitespace)
   (c-toggle-auto-state 0)
   (c-toggle-hungry-state 1)
+  (subword-mode 1)
   (setq js2-basic-offset 2)
   (setq js2-strict-trailing-comma-warning nil)
   (setq js2-global-externs '("module" "require" "jQuery" "$" "_" "buster"
@@ -60,8 +59,8 @@
 
 (defun my-web-mode-hook ()
   "Hooks for Web mode. Adjust indents"
-  ;;; http://web-mode.org/
   (add-hook 'before-save-hook 'delete-trailing-whitespace)
+  (subword-mode 1)
   (add-to-list 'web-mode-comment-formats '("javascript" . "//" ))
   (define-key web-mode-map [(control c)(control c)] 'js-send-buffer-and-go)
   (setq web-mode-markup-indent-offset 2)
@@ -72,17 +71,6 @@
 
 (dolist (hook '(js2-mode-hook js-mode-hook json-mode-hook))
   (add-hook hook 'rainbow-delimiters-mode))
-
-(defun js-unicode ()
-  (interactive)
-  (substitute-patterns-with-unicode
-   (list ;; (cons "[:=]\s+\\(function\\(()\\)?\\)" 'lambda)
-         ;; (cons "\\(&&\\)" 'logical-and)
-         ;; (cons "\\(||\\)" 'logical-or)
-         (cons "\\(!==\\)" 'not-equal)
-         (cons "\\(>=\\)" 'greater-than-or-equal-to)
-         (cons "\\(<=\\)" 'less-than-or-equal-to))))
-
 
 (setq inferior-js-program-command "node --harmony")
 (setq inferior-js-mode-hook
@@ -105,21 +93,22 @@
   (shell-command  (buffer-substring-no-properties start end)))
 
 
-(defun run-prettier-before-save ()
-  (interactive)
-  ((when (eq major-mode 'js2-mode) (prettier))))
-
 (setq web-mode-content-types-alist '(("jsx"  . "\\.js[x]?\\'")))
+(setq js-indent-level 2)
 
 (add-hook 'js2-mode-hook 'custom-js2-mode-hook)
-(add-hook 'js2-mode-hook 'js-unicode)
 (add-hook 'js2-mode-hook 'flycheck-mode)
 
 (add-hook 'web-mode-hook  'my-web-mode-hook)
 (add-hook 'web-mode-hook  'flycheck-mode)
-(add-hook 'web-mode-hook  'js-unicode)
+(add-hook 'web-mode-hook  'rainbow-delimiters-mode)
+
 
 (flycheck-add-mode 'javascript-eslint 'js2-mode)
 (flycheck-add-mode 'javascript-eslint 'web-mode)
+
+(with-eval-after-load 'flycheck
+  (flycheck-add-mode 'javascript-eslint 'web-mode)
+  (flycheck-add-mode 'css-csslint 'web-mode))
 
 (provide 'init-js)

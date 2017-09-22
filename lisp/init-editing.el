@@ -11,6 +11,9 @@
 (defun turn-off-delete-trailing-whitespace ()
   (interactive)
   (remove-hook 'before-save-hook 'delete-trailing-whitespace))
+(defun turn-on-delete-trailing-whitespace ()
+  (interactive)
+  (add-hook 'before-save-hook 'delete-trailing-whitespace))
 
 
 (defun rename-file-and-buffer (new-name)
@@ -118,6 +121,7 @@
 
 (electric-pair-mode)
 (show-paren-mode)
+(global-subword-mode 1)
 ;; Quit minimising the fucking window on accident
 (when window-system
   (progn

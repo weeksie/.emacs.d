@@ -12,9 +12,12 @@
                "\\.arb$"
                "\\.deface$")
 
-(defun ruby-eval-buffer () (interactive)
-   "Evaluate the buffer with ruby."
-   (shell-command-on-region (point-min) (point-max) "ruby -W0"))
+(defun ruby-eval-buffer ()
+  (interactive)
+  "Evaluate the buffer with ruby."
+  (let ((output-buffer "*Ruby Output*"))
+    (shell-command-on-region (point-min) (point-max) "ruby" output-buffer)
+    (switch-to-buffer output-buffer)))
 
 (defun ruby-electric-space (arg)
   (interactive "P")

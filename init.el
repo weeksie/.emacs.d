@@ -34,12 +34,11 @@
 (setq auto-save-default nil)
 (setq backup-directory-alist `(("." . "~/.emacs.d/.saves")))
 (setq backup-by-copying t)
-;(desktop-save-mode nil)
-;(setq desktop-restore-eager t)
-;(set-default-font "Inconsolata-14")
-;(set-default-font "Consolas-13")
-(set-default-font "Mononoki-13")
-(set-background-color "#fdf6e3")
+
+
+(add-to-list 'custom-theme-load-path (expand-file-name "emacs-color-theme-solarized" user-emacs-directory))
+(add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
+(add-to-list 'load-path (expand-file-name "site-lisp" user-emacs-directory))
 
 (when window-system
   (progn
@@ -48,10 +47,9 @@
     (split-window-horizontally)
     (enlarge-window 20)))
 
-(add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
-(add-to-list 'load-path (expand-file-name "site-lisp" user-emacs-directory))
 
-
+(require 'init-fonts)
+(require 'init-theme)
 (require 'init-compat)
 (require 'init-utils)
 (require 'init-site-lisp)
@@ -80,6 +78,9 @@
 (require 'init-projectile)
 (require 'init-sql)
 (require 'init-docker)
+(require 'init-octave)
+(require 'init-cypher)
+
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -88,10 +89,10 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (alchemist slim-mode ruby-hash-syntax dockerfile-mode avy graphql-mode graphql flx-ido projectile-rails projectile yaml-mode web-mode tidy skewer-less scss-mode sass-mode rainbow-mode rainbow-delimiters php-mode nyan-mode mmm-mode markdown-mode magit lua-mode less-css-mode json-mode js-comint haskell-mode git-timemachine fullframe flycheck exec-path-from-shell ess erlang elm-mode elixir-mode css-eldoc coffee-mode))))
+    (cypher-mode cypher rainbow ob-elixer slime-js skewer prettier prettier-js prettier-mode emojify alchemist slim-mode ruby-hash-syntax dockerfile-mode avy graphql-mode graphql flx-ido projectile-rails projectile yaml-mode web-mode tidy skewer-less scss-mode sass-mode rainbow-mode rainbow-delimiters php-mode nyan-mode mmm-mode markdown-mode magit lua-mode less-css-mode json-mode js-comint haskell-mode git-timemachine fullframe flycheck exec-path-from-shell ess erlang elm-mode elixir-mode css-eldoc coffee-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(default ((t (:inherit nil :stipple nil :background "#F4EDDB" :foreground "Black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 120 :width normal :foundry "nil" :family "Fira Code")))))
