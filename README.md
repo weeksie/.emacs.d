@@ -2,6 +2,8 @@
 
 Format (and several files) shamelessly copied from https://github.com/purcell/emacs.d
 
-This is far more pared back. Only a few of the major modes that I
-typicaly use are included and I didn't even go so far as to include a
-theme. Just set the background color and the font.
+Mostly pared back, though lots of new modes have been added since I
+first cloned and trimmed that repo. I also (finally) switched from my
+hacky cream colored background to using the Solarized theme, which
+makes me happy in a very Tufte-ish way.
+
