@@ -2,6 +2,8 @@
 (require-package 'js-comint)
 (require-package 'web-mode)
 (require-package 'flycheck)
+(require-package 'rjsx-mode)
+(require-package 'rainbow-delimiters)
 
 (require 'flycheck) ; no idea why this is needed for flycheck but not the others
 
@@ -9,12 +11,18 @@
 (maybe-require-package 'coffee-mode)
 
 
+(add-auto-mode 'js2-mode "\\.js$")
+(add-auto-mode 'rjsx-mode
+               "components\\/.*\\.js$"
+               "containers\\/.*\\.js$"
+               "pages\\/.*\\.js$")
+
+
 (add-auto-mode 'web-mode
-               "\\.js$"
-               "\\.jsx$"
                "\\.html$"
                "\\.jsp$"
                "\\.erb$"
+               "\\.eex$"
                "\\.php$")
 
 ;; (add-auto-mode 'js2-mode
@@ -37,6 +45,7 @@
   (c-toggle-auto-state 0)
   (c-toggle-hungry-state 1)
   (subword-mode 1)
+  (lambda () (interactive) (column-marker-1 100))
   (setq js2-basic-offset 2)
   (setq js2-strict-trailing-comma-warning nil)
   (setq js2-global-externs '("module" "require" "jQuery" "$" "_" "buster"
@@ -51,23 +60,6 @@
   (define-key js2-mode-map [(control c)(control c)] 'js-send-buffer-and-go)
   (set-variable 'tab-width 2))
 
-(defadvice web-mode-highlight-part (around tweak-jsx activate)
-  (if (equal web-mode-content-type "jsx")
-      (let ((web-mode-enable-part-face nil))
-        ad-do-it)
-    ad-do-it))
-
-(defun my-web-mode-hook ()
-  "Hooks for Web mode. Adjust indents"
-  (add-hook 'before-save-hook 'delete-trailing-whitespace)
-  (subword-mode 1)
-  (add-to-list 'web-mode-comment-formats '("javascript" . "//" ))
-  (define-key web-mode-map [(control c)(control c)] 'js-send-buffer-and-go)
-  (setq web-mode-markup-indent-offset 2)
-  (setq web-mode-css-indent-offset 2)
-  (setq web-mode-code-indent-offset 2))
-
-(require-package 'rainbow-delimiters)
 
 (dolist (hook '(js2-mode-hook js-mode-hook json-mode-hook))
   (add-hook hook 'rainbow-delimiters-mode))
@@ -92,20 +84,15 @@
   (interactive "r")
   (shell-command  (buffer-substring-no-properties start end)))
 
-
-(setq web-mode-content-types-alist '(("jsx"  . "\\.js[x]?\\'")))
 (setq js-indent-level 2)
+(setq js-switch-indent-offset 2)
+
+(flycheck-add-mode 'javascript-eslint 'js2-mode)
+
+(setq flycheck-eslintrc ".eslintrc")
 
 (add-hook 'js2-mode-hook 'custom-js2-mode-hook)
 (add-hook 'js2-mode-hook 'flycheck-mode)
-
-(add-hook 'web-mode-hook  'my-web-mode-hook)
-(add-hook 'web-mode-hook  'flycheck-mode)
-(add-hook 'web-mode-hook  'rainbow-delimiters-mode)
-
-
-(flycheck-add-mode 'javascript-eslint 'js2-mode)
-(flycheck-add-mode 'javascript-eslint 'web-mode)
 
 (with-eval-after-load 'flycheck
   (flycheck-add-mode 'javascript-eslint 'web-mode)

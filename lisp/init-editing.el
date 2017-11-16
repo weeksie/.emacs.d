@@ -1,6 +1,6 @@
 (require-package 'nyan-mode)
 (require-package 'avy)
-
+(require-package 'column-marker)
 
 
 (defun nuke-all-buffers ()
@@ -118,9 +118,10 @@
 
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 2)
-
+(setq-default column-number-mode 1)
 (electric-pair-mode)
 (show-paren-mode)
+
 (global-subword-mode 1)
 ;; Quit minimising the fucking window on accident
 (when window-system
@@ -129,5 +130,6 @@
     (global-set-key "\C-x\C-z" 'save-buffer)))
 
 
+(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 
 (provide 'init-editing)

@@ -4,7 +4,6 @@
 (require-package 'emojify)
 
 (add-auto-mode 'web-mode
-               "\\.jsx$"
                "\\.html$"
                "\\.erb$"
                "\\.ejs$"
