@@ -4,6 +4,9 @@
 (require-package 'flycheck)
 (require-package 'rjsx-mode)
 (require-package 'rainbow-delimiters)
+(require-package 'tide)
+(require-package 'company)
+(require-package 'typescript-mode)
 
 (require 'flycheck) ; no idea why this is needed for flycheck but not the others
 
@@ -18,12 +21,15 @@
                "pages\\/.*\\.js$")
 
 
+(add-auto-mode 'typescript-mode "\\.ts$")
+
 (add-auto-mode 'web-mode
                "\\.html$"
                "\\.jsp$"
                "\\.erb$"
                "\\.eex$"
-               "\\.php$")
+               "\\.php$"
+               "\\.tsx$")
 
 ;; (add-auto-mode 'js2-mode
 ;;                "\\.js$"
@@ -85,17 +91,49 @@
   (shell-command  (buffer-substring-no-properties start end)))
 
 (setq js-indent-level 2)
+(setq js2-indent-level 2)
+(setq js3-indent-level 2)
+(setq js2-basic-offset 2)
+(setq sgml-basic-offset 2)
+(setq standard-indent 2)
 (setq js-switch-indent-offset 2)
+(setq typescript-indent-level 2)
+(setq web-mode-markup-indent-offset 2)
+(setq web-mode-code-indent-offset 2)
 
-(flycheck-add-mode 'javascript-eslint 'js2-mode)
 
 (setq flycheck-eslintrc ".eslintrc")
 
 (add-hook 'js2-mode-hook 'custom-js2-mode-hook)
 (add-hook 'js2-mode-hook 'flycheck-mode)
+;; (add-hook 'js2-mode-hook 'flow-minor-mode)
+;; (remove-hook 'js2-mode-hook 'flow-minor-mode t)
 
 (with-eval-after-load 'flycheck
   (flycheck-add-mode 'javascript-eslint 'web-mode)
   (flycheck-add-mode 'css-csslint 'web-mode))
+
+
+(defun setup-tide-mode ()
+  (interactive)
+  (tide-setup)
+  (flycheck-mode +1)
+  (setq flycheck-check-syntax-automatically '(save mode-enabled))
+  (eldoc-mode +1)
+  (tide-hl-identifier-mode +1)
+  ;; company is an optional dependency. You have to
+  ;; install it separately via package-install
+  ;; `M-x package-install [ret] company`
+  (company-mode +1))
+
+(add-hook 'web-mode-hook
+          (lambda ()
+            (when (string-equal "tsx" (file-name-extension buffer-file-name))
+              (setup-tide-mode))))
+
+;; aligns annotation to the right hand side
+; (setq company-tooltip-align-annotations t)
+
+(add-hook 'typescript-mode-hook #'setup-tide-mode)
 
 (provide 'init-js)

@@ -1,5 +1,6 @@
 (require-package 'elixir-mode)
 (require-package 'alchemist)
+(require-package 'flycheck-credo)
 (add-auto-mode 'elixir-mode "\\.ex$")
 (require 'rainbow-mode)
 
@@ -21,6 +22,10 @@
                               (progn
                                 (define-key elixir-mode-map [M-return] 'elixir-insert-pipe)
                                 (define-key elixir-mode-map (kbd "C-\"") 'elixir-insert-triple-quote))))
+
+(eval-after-load 'flycheck
+  '(flycheck-credo-setup))
+(add-hook 'elixir-mode-hook 'flycheck-mode)
 
 (add-hook 'elixir-mode-hook 'rainbow-delimiters-mode)
 

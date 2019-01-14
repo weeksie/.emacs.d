@@ -1,7 +1,7 @@
 (require-package 'ruby-mode)
 (require-package 'ruby-hash-syntax)
 (add-auto-mode 'ruby-mode
-               "\\.r[bs]$"
+               "\\.rb$"
                "Rakefile"
                "Guardfile"
                "Gemfile"
@@ -59,7 +59,6 @@
 
 (add-hook 'ruby-mode-hook (lambda ()
 			    (progn
-			      (gd-add-to-mode)
 			      (define-key ruby-mode-map "\C-c\C-c" 'ruby-eval-buffer)
 			      (define-key ruby-mode-map "\C-xrh" 'ruby-align-hash)
 			      (define-key ruby-mode-map "\t" 'ruby-auto-indent)

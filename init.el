@@ -63,6 +63,7 @@
 (require 'init-graphql)
 (require 'init-lua)
 (require 'init-ruby)
+(require 'init-rust)
 (require 'init-php)
 (require 'init-elm)
 (require 'init-nxml)
@@ -89,7 +90,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (column-marker rjsx-mode js2-mode cypher-mode cypher rainbow ob-elixer slime-js skewer prettier prettier-js prettier-mode emojify alchemist slim-mode ruby-hash-syntax dockerfile-mode avy graphql-mode graphql flx-ido projectile-rails projectile yaml-mode web-mode tidy skewer-less scss-mode sass-mode rainbow-mode rainbow-delimiters php-mode nyan-mode mmm-mode markdown-mode magit lua-mode less-css-mode json-mode js-comint haskell-mode git-timemachine fullframe flycheck exec-path-from-shell ess erlang elm-mode elixir-mode css-eldoc coffee-mode))))
+    (toml-mode rust-mode typescript tide flow-minor-mode flycheck-credo column-marker rjsx-mode js2-mode cypher-mode cypher rainbow ob-elixer slime-js skewer prettier prettier-js prettier-mode emojify alchemist slim-mode ruby-hash-syntax dockerfile-mode avy graphql-mode graphql flx-ido projectile-rails projectile yaml-mode web-mode tidy skewer-less scss-mode sass-mode rainbow-mode rainbow-delimiters php-mode nyan-mode mmm-mode markdown-mode magit lua-mode less-css-mode json-mode js-comint haskell-mode git-timemachine fullframe flycheck exec-path-from-shell ess erlang elm-mode elixir-mode css-eldoc coffee-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

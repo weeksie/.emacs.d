@@ -5,5 +5,6 @@
  '((emacs-lisp . t)
    (sh . t)
    (elixir . t)
+   (R . t)
    (org . t)
    (ditaa . t)))
