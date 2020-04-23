@@ -7,8 +7,4 @@
              (set-terminal-parameter frame 'background-mode mode))
            (enable-theme 'solarized)))
 
-
-;(set-background-color "#fdf6e3")
-
-;(setq solarized-contrast 'high)
 (provide 'init-theme)

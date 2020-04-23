@@ -2,7 +2,7 @@
 (require-package 'alchemist)
 (require-package 'flycheck-credo)
 (add-auto-mode 'elixir-mode "\\.ex$")
-(require 'rainbow-mode)
+(require-package 'rainbow-mode)
 
 (defun elixir-insert-pipe ()
   (interactive)

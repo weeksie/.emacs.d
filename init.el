@@ -36,20 +36,21 @@
 (setq backup-by-copying t)
 
 
-(add-to-list 'custom-theme-load-path (expand-file-name "emacs-color-theme-solarized" user-emacs-directory))
+(add-to-list 'custom-theme-load-path
+             (expand-file-name "emacs-color-theme-solarized" user-emacs-directory))
+
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 (add-to-list 'load-path (expand-file-name "site-lisp" user-emacs-directory))
 
 (when window-system
   (progn
+    (require 'init-theme)
     (set-frame-size (selected-frame) 205 70)
     (split-window-vertically)
     (split-window-horizontally)
     (enlarge-window 20)))
 
-
 (require 'init-fonts)
-(require 'init-theme)
 (require 'init-compat)
 (require 'init-utils)
 (require 'init-site-lisp)
@@ -81,8 +82,9 @@
 (require 'init-docker)
 (require 'init-octave)
 (require 'init-cypher)
-
-
+(require 'init-solidity)
+(require 'init-clojure)
+(require 'init-zil)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -90,10 +92,10 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (toml-mode rust-mode typescript tide flow-minor-mode flycheck-credo column-marker rjsx-mode js2-mode cypher-mode cypher rainbow ob-elixer slime-js skewer prettier prettier-js prettier-mode emojify alchemist slim-mode ruby-hash-syntax dockerfile-mode avy graphql-mode graphql flx-ido projectile-rails projectile yaml-mode web-mode tidy skewer-less scss-mode sass-mode rainbow-mode rainbow-delimiters php-mode nyan-mode mmm-mode markdown-mode magit lua-mode less-css-mode json-mode js-comint haskell-mode git-timemachine fullframe flycheck exec-path-from-shell ess erlang elm-mode elixir-mode css-eldoc coffee-mode))))
+    (paredit cider clojure-mode solidity-flycheck company-solidity solidity-mode cypher-mode dockerfile-mode projectile-rails projectile magit yaml-mode markdown-mode css-eldoc web-mode typescript-mode toml-mode rust-mode ruby-hash-syntax rjsx-mode rainbow-mode rainbow-delimiters php-mode nyan-mode mmm-mode lua-mode json-mode js-comint haskell-mode graphql-mode fullframe flycheck-credo flx-ido exec-path-from-shell ess erlang elm-mode coffee-mode avy alchemist))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "#F4EDDB" :foreground "Black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 120 :width normal :foundry "nil" :family "Fira Code")))))
+ )

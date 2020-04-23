@@ -1,9 +1,3 @@
-;;; Colourise CSS colour literals
-(when (maybe-require-package 'rainbow-mode)
-  (dolist (hook '(css-mode-hook html-mode-hook sass-mode-hook))
-    (add-hook hook 'rainbow-mode)))
-
-
 ;;; Embedding in html
 (require-package 'mmm-mode)
 (after-load 'mmm-vars
@@ -30,9 +24,6 @@
       :back "\"")))
   (dolist (mode (list 'html-mode 'nxml-mode))
     (mmm-add-mode-ext-class mode "\\.r?html\\(\\.erb\\)?\\'" 'html-css)))
-
-
-
 
 ;;; SASS and SCSS
 ;; (require-package 'sass-mode)

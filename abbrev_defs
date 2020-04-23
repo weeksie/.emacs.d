@@ -47,6 +47,10 @@
 
 (define-abbrev-table 'bibtex-mode-abbrev-table '())
 
+(define-abbrev-table 'bookmark-bmenu-mode-abbrev-table '())
+
+(define-abbrev-table 'bookmark-edit-annotation-mode-abbrev-table '())
+
 (define-abbrev-table 'c++-mode-abbrev-table
   '(
    ))
@@ -111,8 +115,13 @@
 
 (define-abbrev-table 'gfm-mode-abbrev-table '())
 
+(define-abbrev-table 'gfm-view-mode-abbrev-table '())
+
 (define-abbrev-table 'global-abbrev-table
   '(
+    ("title?
+
+" ">" nil 0)
     ("tom\"
 " "==" nil 0)
    ))
@@ -151,6 +160,8 @@
 
 (define-abbrev-table 'inferior-julia-mode-abbrev-table '())
 
+(define-abbrev-table 'inform-mode-abbrev-table '())
+
 (define-abbrev-table 'java-mode-abbrev-table
   '(
    ))
@@ -172,6 +183,8 @@
 (define-abbrev-table 'literate-haskell-mode-abbrev-table '())
 
 (define-abbrev-table 'markdown-mode-abbrev-table '())
+
+(define-abbrev-table 'markdown-view-mode-abbrev-table '())
 
 (define-abbrev-table 'message-mode-abbrev-table '())
 
@@ -237,7 +250,17 @@
 
 (define-abbrev-table 'tar-mode-abbrev-table '())
 
+(define-abbrev-table 'term-mode-abbrev-table '())
+
 (define-abbrev-table 'text-mode-abbrev-table '())
+
+(define-abbrev-table 'tide-project-errors-mode-abbrev-table '())
+
+(define-abbrev-table 'tide-references-mode-abbrev-table '())
+
+(define-abbrev-table 'tide-server-list-mode-abbrev-table '())
+
+(define-abbrev-table 'typescript-mode-abbrev-table '())
 
 (define-abbrev-table 'url-cookie-mode-abbrev-table '())
 
@@ -250,4 +273,6 @@
 (define-abbrev-table 'web-mode-abbrev-table '())
 
 (define-abbrev-table 'xref--xref-buffer-mode-abbrev-table '())
+
+(define-abbrev-table 'yaml-mode-abbrev-table '())
 

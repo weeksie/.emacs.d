@@ -7,6 +7,7 @@
                "\\.html$"
                "\\.erb$"
                "\\.ejs$"
+               "\\.liquid$"
                "\\.php$")
 
 (add-auto-mode 'slim-mode

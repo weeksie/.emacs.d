@@ -1,7 +1,6 @@
 (require-package 'nyan-mode)
 (require-package 'avy)
-(require-package 'column-marker)
-
+; (require-package 'column-marker)
 
 (defun nuke-all-buffers ()
   (interactive)
@@ -100,6 +99,17 @@
         (sort-subr nil 'forward-line 'end-of-line nil nil
                    (lambda (s1 s2) (eq (random 2) 0)))))))
 
+(defun upcase-rectangle (b e)
+  "change chars in rectangle to uppercase"
+  (interactive "r")
+  (apply-on-rectangle 'upcase-rectangle-line b e))
+
+(defun upcase-rectangle-line (startcol endcol)
+  (when (= (move-to-column startcol) startcol)
+    (upcase-region (point)
+                   (progn (move-to-column endcol 'coerce)
+                          (point)))))
+
 (global-set-key [C-M-up] 'copy-yank-up)
 (global-set-key [C-M-down] 'copy-yank-down)
 (global-set-key [M-up] 'kill-yank-up)
@@ -128,6 +138,8 @@
 
 (global-set-key (kbd "M-\140") 'other-window) ; M-` just like in the rest of OS X
 (setq mac-command-modifier 'meta mac-option-modifier nil)
+
+(global-hl-line-mode 1)
 
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 2)

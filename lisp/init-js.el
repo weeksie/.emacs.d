@@ -4,7 +4,6 @@
 (require-package 'flycheck)
 (require-package 'rjsx-mode)
 (require-package 'rainbow-delimiters)
-(require-package 'tide)
 (require-package 'company)
 (require-package 'typescript-mode)
 
@@ -16,6 +15,7 @@
 
 (add-auto-mode 'js2-mode "\\.js$")
 (add-auto-mode 'rjsx-mode
+               "templates\\/.*\\.js$"
                "components\\/.*\\.js$"
                "containers\\/.*\\.js$"
                "pages\\/.*\\.js$")
@@ -57,13 +57,13 @@
   (setq js2-global-externs '("module" "require" "jQuery" "$" "_" "buster"
                              "sinon" "assert" "refute" "setTimeout" "clearTimeout"
                              "setInterval" "clearInterval" "location" "__dirname"
-                             "beforEach" "describe" "it" "expect"
+                             "beforeEach" "describe" "it" "expect"
                              "console" "JSON"))
   (define-key js2-mode-map [(return)] 'newline-and-indent)
   (define-key js2-mode-map [(backspace)] 'c-electric-backspace)
   (define-key js2-mode-map [(control d)] 'c-electric-delete-forward)
   (define-key js2-mode-map [(control meta q)] 'my-indent-sexp)
-  (define-key js2-mode-map [(control c)(control c)] 'js-send-buffer-and-go)
+  (define-key js2-mode-map [(control c)(control c)] 'js-send-buffer)
   (set-variable 'tab-width 2))
 
 
@@ -89,6 +89,8 @@
   "execute region in an inferior shell"
   (interactive "r")
   (shell-command  (buffer-substring-no-properties start end)))
+
+
 
 (setq js-indent-level 2)
 (setq js2-indent-level 2)
@@ -133,7 +135,5 @@
 
 ;; aligns annotation to the right hand side
 ; (setq company-tooltip-align-annotations t)
-
-(add-hook 'typescript-mode-hook #'setup-tide-mode)
 
 (provide 'init-js)

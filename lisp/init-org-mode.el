@@ -1,3 +1,4 @@
+(require-package 'org-journal)
 (require 'ob-elixir)
 
 (org-babel-do-load-languages
@@ -8,3 +9,5 @@
    (R . t)
    (org . t)
    (ditaa . t)))
+
+(provide 'init-org-mode);

@@ -19,6 +19,12 @@
     (shell-command-on-region (point-min) (point-max) "ruby" output-buffer)
     (switch-to-buffer output-buffer)))
 
+(defun ruby-insert-end ()
+  (save-excursion
+    (progn
+      (princ "end" (current-buffer))
+      (ruby-indent-line t))))
+
 (defun ruby-electric-space (arg)
   (interactive "P")
   (self-insert-command (prefix-numeric-value arg))
