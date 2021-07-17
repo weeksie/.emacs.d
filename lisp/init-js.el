@@ -5,7 +5,11 @@
 (require-package 'rjsx-mode)
 (require-package 'rainbow-delimiters)
 (require-package 'company)
-(require-package 'typescript-mode)
+;(require-package 'tide)
+(require-package 'dash)
+(require-package 'lsp-mode)
+
+(add-hook 'prog-mode-hook #'lsp)
 
 (require 'flycheck) ; no idea why this is needed for flycheck but not the others
 
@@ -36,6 +40,7 @@
 ;;                "\\.ejs$")
 
 (add-auto-mode 'json-mode
+               "\\.babelrc"
                "\\.eslintrc"
                "\\.ftppass"
                "\\.json$")
@@ -48,22 +53,17 @@
 
 (defun custom-js2-mode-hook ()
   (add-hook 'before-save-hook 'delete-trailing-whitespace)
-  (c-toggle-auto-state 0)
-  (c-toggle-hungry-state 1)
   (subword-mode 1)
-  (lambda () (interactive) (column-marker-1 100))
   (setq js2-basic-offset 2)
   (setq js2-strict-trailing-comma-warning nil)
-  (setq js2-global-externs '("module" "require" "jQuery" "$" "_" "buster"
+  (setq js2-global-externs '("module" "require" "jQuery" "$" "_" "buster" "context"
                              "sinon" "assert" "refute" "setTimeout" "clearTimeout"
                              "setInterval" "clearInterval" "location" "__dirname"
-                             "beforeEach" "describe" "it" "expect"
-                             "console" "JSON"))
+                             "beforeEach" "beforeAll" "describe" "it" "expect" "afterEach" "afterAll"
+                             "console" "JSON" "FormData" "fetch"))
   (define-key js2-mode-map [(return)] 'newline-and-indent)
   (define-key js2-mode-map [(backspace)] 'c-electric-backspace)
   (define-key js2-mode-map [(control d)] 'c-electric-delete-forward)
-  (define-key js2-mode-map [(control meta q)] 'my-indent-sexp)
-  (define-key js2-mode-map [(control c)(control c)] 'js-send-buffer)
   (set-variable 'tab-width 2))
 
 
@@ -102,7 +102,8 @@
 (setq typescript-indent-level 2)
 (setq web-mode-markup-indent-offset 2)
 (setq web-mode-code-indent-offset 2)
-
+(setq lsp-enable-on-type-formatting nil)
+(setq lsp-enable-indentation nil)
 
 (setq flycheck-eslintrc ".eslintrc")
 
@@ -123,17 +124,20 @@
   (setq flycheck-check-syntax-automatically '(save mode-enabled))
   (eldoc-mode +1)
   (tide-hl-identifier-mode +1)
+  ;; (tide-allow-popup-select '(code-fix refactor))
   ;; company is an optional dependency. You have to
   ;; install it separately via package-install
   ;; `M-x package-install [ret] company`
   (company-mode +1))
 
-(add-hook 'web-mode-hook
-          (lambda ()
-            (when (string-equal "tsx" (file-name-extension buffer-file-name))
-              (setup-tide-mode))))
+;; (add-hook 'web-mode-hook
+;;           (lambda ()
+;;             (when (string-equal "tsx" (file-name-extension buffer-file-name))
+;;               (setup-tide-mode))))
+
+;(add-hook 'typescript-mode-hook #'setup-tide-mode)
 
 ;; aligns annotation to the right hand side
-; (setq company-tooltip-align-annotations t)
+(setq company-tooltip-align-annotations t)
 
 (provide 'init-js)

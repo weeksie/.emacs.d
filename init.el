@@ -2,7 +2,7 @@
 ;; installed packages.  Don't delete this line.  If you don't want it,
 ;; just comment it out by adding a semicolon to the start of the line.
 ;; You may delete these explanatory comments.
-(package-initialize)
+;(package-initialize)
 
 (when (not package-archive-contents)
     (package-refresh-contents))
@@ -12,8 +12,6 @@
     (error "Your Emacs is too old -- this config requires v%s or higher" minver)))
 (when (version<= emacs-version "24")
   (message "Your Emacs is old, and some functionality in this config will be disabled. Please upgrade if possible."))
-
-
 
 ;;; Good for error states.
 (defun open-preferences ()
@@ -37,7 +35,7 @@
 
 
 (add-to-list 'custom-theme-load-path
-             (expand-file-name "emacs-color-theme-solarized" user-emacs-directory))
+              (expand-file-name "emacs-color-theme-solarized" user-emacs-directory))
 
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 (add-to-list 'load-path (expand-file-name "site-lisp" user-emacs-directory))
@@ -49,6 +47,9 @@
     (split-window-vertically)
     (split-window-horizontally)
     (enlarge-window 20)))
+
+(setq read-process-output-max (* 1024 1024))
+(setq gc-cons-threshold 100000000)
 
 (require 'init-fonts)
 (require 'init-compat)
@@ -85,17 +86,22 @@
 (require 'init-solidity)
 (require 'init-clojure)
 (require 'init-zil)
+(require 'init-idris)
+(require 'init-alloy)
+(require 'init-fstar)
+(require 'init-racket)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   (quote
-    (paredit cider clojure-mode solidity-flycheck company-solidity solidity-mode cypher-mode dockerfile-mode projectile-rails projectile magit yaml-mode markdown-mode css-eldoc web-mode typescript-mode toml-mode rust-mode ruby-hash-syntax rjsx-mode rainbow-mode rainbow-delimiters php-mode nyan-mode mmm-mode lua-mode json-mode js-comint haskell-mode graphql-mode fullframe flycheck-credo flx-ido exec-path-from-shell ess erlang elm-mode coffee-mode avy alchemist))))
+   '(lsp-mode geiser-mit racket-mode tla-mode tla-pcal-mode fstar-mode alloy-mode idris-mode solarized-theme tide tide-mode js2-mode paredit cider clojure-mode solidity-flycheck company-solidity solidity-mode cypher-mode dockerfile-mode projectile-rails projectile magit yaml-mode markdown-mode css-eldoc web-mode typescript-mode toml-mode rust-mode ruby-hash-syntax rjsx-mode rainbow-mode rainbow-delimiters php-mode nyan-mode mmm-mode lua-mode json-mode js-comint haskell-mode graphql-mode fullframe flycheck-credo flx-ido exec-path-from-shell ess erlang elm-mode coffee-mode avy alchemist)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+(put 'upcase-region 'disabled nil)

@@ -118,7 +118,6 @@
 (global-set-key [C-right] 'forward-word)
 (global-set-key [C-left] 'backward-word)
 
-
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (global-set-key "\C-w" 'backward-kill-word)
 (global-set-key "\C-c\C-k" 'kill-region)
