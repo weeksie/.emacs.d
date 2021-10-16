@@ -8,7 +8,8 @@
 ;(require-package 'tide)
 (require-package 'dash)
 (require-package 'lsp-mode)
-
+(require-package 'treemacs)
+(require-package 'lsp-treemacs)
 (add-hook 'prog-mode-hook #'lsp)
 
 (require 'flycheck) ; no idea why this is needed for flycheck but not the others
@@ -116,6 +117,9 @@
   (flycheck-add-mode 'javascript-eslint 'web-mode)
   (flycheck-add-mode 'css-csslint 'web-mode))
 
+(with-eval-after-load 'lsp-mode
+  (flycheck-add-mode 'javascript-eslint 'web-mode)
+  (flycheck-add-mode 'css-csslint 'web-mode))
 
 (defun setup-tide-mode ()
   (interactive)

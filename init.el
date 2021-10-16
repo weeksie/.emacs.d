@@ -97,7 +97,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(lsp-mode geiser-mit racket-mode tla-mode tla-pcal-mode fstar-mode alloy-mode idris-mode solarized-theme tide tide-mode js2-mode paredit cider clojure-mode solidity-flycheck company-solidity solidity-mode cypher-mode dockerfile-mode projectile-rails projectile magit yaml-mode markdown-mode css-eldoc web-mode typescript-mode toml-mode rust-mode ruby-hash-syntax rjsx-mode rainbow-mode rainbow-delimiters php-mode nyan-mode mmm-mode lua-mode json-mode js-comint haskell-mode graphql-mode fullframe flycheck-credo flx-ido exec-path-from-shell ess erlang elm-mode coffee-mode avy alchemist)))
+   '(lsp-treemacs treemacs lsp-mode geiser-mit racket-mode tla-mode tla-pcal-mode fstar-mode alloy-mode idris-mode solarized-theme tide tide-mode js2-mode paredit cider clojure-mode solidity-flycheck company-solidity solidity-mode cypher-mode dockerfile-mode projectile-rails projectile magit yaml-mode markdown-mode css-eldoc web-mode typescript-mode toml-mode rust-mode ruby-hash-syntax rjsx-mode rainbow-mode rainbow-delimiters php-mode nyan-mode mmm-mode lua-mode json-mode js-comint haskell-mode graphql-mode fullframe flycheck-credo flx-ido exec-path-from-shell ess erlang elm-mode coffee-mode avy alchemist)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
