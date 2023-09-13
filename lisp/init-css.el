@@ -27,9 +27,8 @@
 
 ;;; SASS and SCSS
 ;; (require-package 'sass-mode)
-;; (require-package 'scss-mode)
-;; (setq-default scss-compile-at-save nil)
-
+(require-package 'scss-mode)
+(setq-default scss-compile-at-save nil)
 
 
 ;;; LESS
@@ -45,15 +44,15 @@
     (add-hook hook 'ac-css-mode-setup)))
 
 
-;;; Use eldoc for syntax hints
-(require-package 'css-eldoc)
-(autoload 'turn-on-css-eldoc "css-eldoc")
-(add-hook 'css-mode-hook 'turn-on-css-eldoc)
-(add-hook 'css-mode-hook (lambda ()
-                           (setq css-indent-offset 2)
-                           (setq indent-tabs-mode nil)))
+;; ;;; Use eldoc for syntax hints
+;; (require-package 'css-eldoc)
+;; (autoload 'turn-on-css-eldoc "css-eldoc")
+;; (add-hook 'css-mode-hook 'turn-on-css-eldoc)
+;; (add-hook 'css-mode-hook (lambda ()
+;;                            (setq css-indent-offset 2)
+;;                            (setq indent-tabs-mode nil)))
 
 
-(add-auto-mode 'css-mode "\\.scss")
+(add-auto-mode 'scss-mode "\\.scss")
 
 (provide 'init-css)

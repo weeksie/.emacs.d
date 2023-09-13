@@ -1,7 +1,13 @@
-(require-package 'rust-mode)
-(require-package 'toml-mode)
+(use-package rustic
+  :straight t
+  :ensure t
+  :mode ("\\.rs" . rustic-mode)
+  :config
+  (setq rustic-lsp-client 'eglot))
 
-(add-auto-mode 'rust-mode "\\.rs$")
-(add-auto-mode 'toml-mode "\\.toml$")
+(use-package toml-mode
+  :straight t
+  :ensure t
+  :mode ("\\.toml" . toml-mode))
 
 (provide 'init-rust)

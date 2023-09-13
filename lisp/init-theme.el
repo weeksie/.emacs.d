@@ -1,10 +1,32 @@
-(load-theme 'solarized t)
+(use-package solarized-theme
+  :straight t
+  :ensure t
+  :config
+  (setq solarized-use-less-bold t)
+  (setq solarized-use-more-italics nil)
+  (setq solarized-distinct-fringe-background t))
 
-(add-hook 'after-make-frame-functions
-         (lambda (frame)
-           (let ((mode (if (display-graphic-p frame) 'light 'dark)))
-             (set-frame-parameter frame 'background-mode mode)
-             (set-terminal-parameter frame 'background-mode mode))
-           (enable-theme 'solarized)))
+(when (window-system)
+  (set-frame-font "Fira Code 12"))
+
+(load-theme 'solarized-light-high-contrast t)
+
+
+;; Native line numbers and fringe setup.
+(setq-default display-line-numbers-width 4)
+
+(add-hook 'after-init-hook
+          (lambda nil
+             (when (fboundp 'mac-auto-operator-composition-mode)
+               (mac-auto-operator-composition-mode))
+             (toggle-frame-maximized)))
+
+(defun light-mode ()
+  (interactive)
+  (load-theme 'solarized-light-high-contrast t))
+
+(defun dark-mode ()
+  (interactive)
+  (load-theme 'solarized-dark t))
 
 (provide 'init-theme)

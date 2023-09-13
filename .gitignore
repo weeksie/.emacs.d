@@ -37,3 +37,12 @@ site-lisp/package/
 /.sx/
 /org-clock-save.el
 ido.last
+.cache
+.lsp-session*
+eln-cache
+org-journal.cache
+straight
+transient
+tree-sitter
+request
+speed-type

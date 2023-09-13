@@ -1,34 +1,28 @@
-(require-package 'web-mode)
-(require-package 'flycheck)
-(require-package 'slim-mode)
-(require-package 'emojify)
+(use-package web-mode
+  :straight t
+  :ensure t
+  :mode ("\\.liquid" "\\.mjml")
+  :config
 
-(add-auto-mode 'web-mode
-               "\\.html$"
-               "\\.erb$"
-               "\\.ejs$"
-               "\\.liquid$"
-               "\\.php$")
+  (setq
+   web-mode-markup-indent-offset 2
+   web-mode-css-indent-offset 2
+   web-mode-code-indent-offset 2
+   web-mode-style-padding 2
+   web-mode-script-padding 2
+   web-mode-enable-auto-closing t
+   web-mode-enable-auto-opening t
+   web-mode-enable-auto-pairing t
+   web-mode-enable-auto-indentation t
+   electric-pair-mode 0)
 
-(add-auto-mode 'slim-mode
-               "\\.slime$")
-
-(defadvice web-mode-highlight-part (around tweak-jsx activate)
-  (if (equal web-mode-content-type "jsx")
-      (let ((web-mode-enable-part-face nil))
-        ad-do-it)
-    ad-do-it))
-
-(defun my-web-mode-hook ()
-  "Hooks for Web mode. Adjust indents"
-  ;;; http://web-mode.org/
-  (interactive)
-  (setq web-mode-markup-indent-offset 2)
-  (setq web-mode-css-indent-offset 2)
-  (setq web-mode-code-indent-offset 2))
-
-(add-hook 'web-mode-hook  'my-web-mode-hook)
-(add-hook 'web-mode-hook  'flycheck-mode)
-(add-hook 'after-init-hook #'global-emojify-mode)
+  (dolist (alist web-mode-engines-auto-pairs)
+    (setcdr alist
+            (cl-loop for pair in (cdr alist)
+                     unless (string-match-p "^[a-z-]" (cdr pair))
+                     collect (cons (car pair)
+                                   (string-trim-right (cdr pair)
+                                                      "\\(?:>\\|]\\|}\\)+\\'")))))
+)
 
 (provide 'init-web)

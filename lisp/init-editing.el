@@ -1,6 +1,7 @@
-(require-package 'nyan-mode)
-(require-package 'avy)
-; (require-package 'column-marker)
+(use-package eldoc
+  :ensure t
+  :config
+  (setq eldoc-echo-area-use-multiline-p nil))
 
 (defun nuke-all-buffers ()
   (interactive)
@@ -110,6 +111,18 @@
                    (progn (move-to-column endcol 'coerce)
                           (point)))))
 
+(defun egg ()
+  (interactive)
+  (desktop-change-dir "~/Workspace/eggbasket"))
+
+(defun shoggy ()
+  (interactive)
+  (desktop-change-dir "~/Workspace/shoggy"))
+
+(defun salad ()
+  (interactive)
+  (desktop-change-dir "~/Workspace/ggf/just-salad"))
+
 (global-set-key [C-M-up] 'copy-yank-up)
 (global-set-key [C-M-down] 'copy-yank-down)
 (global-set-key [M-up] 'kill-yank-up)
@@ -130,12 +143,9 @@
 (global-set-key [C-kp-delete] 'kill-word)
 (global-set-key "\C-x\C-a" 'align-regexp)
 
-(global-set-key (kbd "C-'") 'avy-goto-char-2)
-
-
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
-
-(global-set-key (kbd "M-\140") 'other-window) ; M-` just like in the rest of OS X
+;
+(global-set-key (kbd "M-`") 'other-window) ; M-` just like in the rest of OS X
 (setq mac-command-modifier 'meta mac-option-modifier nil)
 
 (global-hl-line-mode 1)
@@ -143,10 +153,22 @@
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 2)
 (setq-default column-number-mode 1)
+(setq-default case-fold-search t)
+(setq-default temp-buffer-max-height 35)
+
 (electric-pair-mode)
 (show-paren-mode)
 
+(temp-buffer-resize-mode)
+
+(winner-mode)
+
+(global-set-key [C-M-left] 'winner-undo)
+(global-set-key [C-M-right] 'winner-redo)
+
 (global-subword-mode 1)
+
+
 ;; Quit minimising the fucking window on accident
 (when window-system
   (progn

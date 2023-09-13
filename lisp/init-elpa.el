@@ -77,8 +77,8 @@ locate PACKAGE."
 (fullframe list-packages quit-window)
 
 
-(require-package 'cl-lib)
-(require 'cl-lib)
+;(require-package 'cl-lib)
+;(require 'cl-lib)
 
 (defun sanityinc/set-tabulated-list-column-width (col-name width)
   "Set any column with name COL-NAME to the given WIDTH."
